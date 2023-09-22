@@ -6,7 +6,7 @@ import {
   Unique,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { UserRole } from './enums/user.role';
+import { UserRole } from '../enums/user.role';
 
 @Entity('user')
 export class UserEntity {
@@ -14,9 +14,11 @@ export class UserEntity {
   id: string;
 
   @Column({ type: 'varchar', length: 255 })
+  @Unique(['name'])
   name: string;
 
   @Column({ type: 'varchar', length: 255 })
+  @Unique(['email'])
   email: string;
 
   @Column({ type: 'varchar', length: 255 })
@@ -43,5 +45,11 @@ export class UserEntity {
   @BeforeInsert()
   hashPassword() {
     this.password = bcrypt.hashSync(this.password, 10);
+  }
+
+  static create(user: Partial<UserEntity>) {
+    const newUser = new UserEntity();
+    Object.assign(newUser, user);
+    return newUser;
   }
 }

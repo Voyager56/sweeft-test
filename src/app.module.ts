@@ -5,7 +5,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { UserEntity } from './user/user.entity';
+import { UserEntity } from './user/entities/user.entity';
+import { PasswordResetModule } from './password-reset/password-reset.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -23,6 +24,7 @@ import { UserEntity } from './user/user.entity';
     }),
     AuthModule,
     UserModule,
+    PasswordResetModule,
   ],
   controllers: [AppController],
   providers: [AppService],
