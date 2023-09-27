@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
@@ -15,23 +15,26 @@ export class UserService {
     return await this.userRepository.findOne({ where: { email } });
   }
 
-  async findById(id: string): Promise<UserEntity> {
-    return await this.userRepository.findOne({ where: { id } });
+  async findById(id: string, relations: Array<string>): Promise<UserEntity> {
+    return await this.userRepository.findOne({ where: { id }, relations });
   }
 
   async create(user: CreateUserDto): Promise<UserEntity> {
+    if (this.findByEmail(user.email)) {
+      throw new HttpException('User Already Exists', HttpStatus.BAD_REQUEST);
+    }
     return await this.userRepository.save(UserEntity.create(user));
   }
 
   async update(id: string, user: UserEntity): Promise<UserEntity> {
     await this.userRepository.update(id, user);
-    return await this.findById(id);
+    return await this.findById(id, []);
   }
 
-  async delete(id: string): Promise<UserEntity> {
-    const user = await this.findById(id);
+  async delete(id: string): Promise<string> {
+    const user = await this.findById(id, []);
     await this.userRepository.delete(id);
-    return user;
+    return 'User Deleted Successfuly';
   }
 
   async findAll(): Promise<UserEntity[]> {

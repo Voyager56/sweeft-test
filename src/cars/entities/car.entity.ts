@@ -15,7 +15,10 @@ export class CarEntity {
   @Column({ type: 'varchar', length: 255 })
   licensePlate: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.cars)
+  @ManyToOne(() => UserEntity, (user) => user.cars, {
+    onDelete: 'CASCADE',
+    nullable: false,
+  })
   user: UserEntity;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
@@ -23,4 +26,10 @@ export class CarEntity {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
+
+  static create(car: Partial<CarEntity>) {
+    const newCar = new CarEntity();
+    Object.assign(newCar, car);
+    return newCar;
+  }
 }
