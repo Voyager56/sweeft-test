@@ -10,6 +10,8 @@ import { PasswordResetModule } from './password-reset/password-reset.module';
 import { PasswordResetEntity } from './password-reset/entities/passwrod-reset.entity';
 import { CarsModule } from './cars/cars.module';
 import { CarEntity } from './cars/entities/car.entity';
+import { ParkingModule } from './parking/parking.module';
+import { ParkingEntity } from './parking/entities/parking.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -21,7 +23,7 @@ import { CarEntity } from './cars/entities/car.entity';
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE,
-        entities: [UserEntity, PasswordResetEntity, CarEntity],
+        entities: [UserEntity, PasswordResetEntity, CarEntity, ParkingEntity],
         synchronize: true,
       }),
     }),
@@ -29,6 +31,7 @@ import { CarEntity } from './cars/entities/car.entity';
     UserModule,
     PasswordResetModule,
     CarsModule,
+    ParkingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
