@@ -4,7 +4,7 @@ import { CarEntity } from './entities/car.entity';
 import { Repository } from 'typeorm';
 import { CreateCarDto } from './dto/car.create.dto';
 import { UpdateCarDto } from './dto/car.update.dto';
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class CarsService {
@@ -32,9 +32,14 @@ export class CarsService {
     return user.cars;
   }
 
-  async update(userId: string, carDto: UpdateCarDto): Promise<CarEntity> {
+  async update(
+    userId: string,
+    carDto: UpdateCarDto,
+    carId: string,
+  ): Promise<CarEntity> {
     const user = await this.userService.findById(userId, ['cars']);
-    const car = user.cars.find((c) => (c.id = carDto.id));
+    const car = user.cars.find((c) => (c.id = carId));
+    console.log(carDto);
     if (!car) {
       new HttpException('Car Does Not Exist', HttpStatus.BAD_REQUEST);
     }

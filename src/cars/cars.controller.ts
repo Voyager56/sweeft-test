@@ -7,13 +7,13 @@ import {
   UseGuards,
   UsePipes,
   ValidationPipe,
-  HttpException,
-  HttpStatus,
+  Param,
+  Patch,
+  Delete,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/car.create.dto';
-import { DeleteCarDto } from './dto/car.delete.dto';
 import { UpdateCarDto } from './dto/car.update.dto';
 
 @Controller('cars')
@@ -27,20 +27,24 @@ export class CarsController {
   }
 
   @UsePipes(ValidationPipe)
-  @Post('/create')
+  @Post('/')
   create(@Request() req, @Body() createCarDto: CreateCarDto) {
     return this.carService.create(createCarDto, req.userId);
   }
 
   @UsePipes(ValidationPipe)
-  @Post('/delete')
-  delete(@Request() req, @Body() deletecarDto: DeleteCarDto) {
-    return this.carService.delete(req.userId, deletecarDto.id);
+  @Delete(':id')
+  delete(@Request() req, @Param('id') id: string) {
+    return this.carService.delete(req.userId, id);
   }
 
-  @UsePipes(ValidationPipe)
-  @Post('/update')
-  update(@Request() req, @Body() UpdateCarDto: UpdateCarDto) {
-    return this.carService.update(req.userId, UpdateCarDto);
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  @Patch(':id')
+  update(
+    @Request() req,
+    @Body() UpdateCarDto: UpdateCarDto,
+    @Param('id') id: string,
+  ) {
+    return this.carService.update(req.userId, UpdateCarDto, id);
   }
 }

@@ -6,8 +6,7 @@ import {
   UsePipes,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/use.create.dto';
-import { AuthService } from 'src/auth/auth.service';
+import { CreateUserDto } from './dto/user.create.dto';
 
 @Controller('user')
 export class UserController {

@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
-import { CreateUserDto } from './dto/use.create.dto';
+import { CreateUserDto } from './dto/user.create.dto';
 import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UserService {
@@ -20,7 +20,8 @@ export class UserService {
   }
 
   async create(user: CreateUserDto): Promise<UserEntity> {
-    if (this.findByEmail(user.email)) {
+    const existingUser = await this.findByEmail(user.email);
+    if (existingUser) {
       throw new HttpException('User Already Exists', HttpStatus.BAD_REQUEST);
     }
     return await this.userRepository.save(UserEntity.create(user));

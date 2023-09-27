@@ -1,10 +1,8 @@
-import { IsEnum, MinLength, IsNotEmpty } from 'class-validator';
+import { IsEnum, MinLength, IsNotEmpty, IsOptional } from 'class-validator';
 import { CarType } from '../enums/car-types.enum';
+import { Exclude } from 'class-transformer';
 
 export class UpdateCarDto {
-  @IsNotEmpty()
-  id: string;
-
   @MinLength(3)
   name: string;
 

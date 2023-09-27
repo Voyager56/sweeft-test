@@ -1,6 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  BeforeInsert,
+} from 'typeorm';
 import { CarType } from '../enums/car-types.enum';
-import { UserEntity } from 'src/user/entities/user.entity';
+import { UserEntity } from '../../user/entities/user.entity';
 @Entity('car')
 export class CarEntity {
   @PrimaryGeneratedColumn('uuid')
