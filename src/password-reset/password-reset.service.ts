@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PasswordResetEntity } from './entities/passwrod-reset.entity';
@@ -29,14 +29,18 @@ export class PasswordResetService {
     });
 
     if (!tokenField) {
-      return new Error('Invalid token');
+      throw new HttpException('Invalid token', HttpStatus.BAD_REQUEST);
     }
 
     // check if token is expired
     if (tokenField.expirationDate < new Date()) {
-      return new Error('Token expired');
+      throw new HttpException('Token expired', HttpStatus.BAD_REQUEST);
     }
 
     return tokenField;
+  }
+
+  public async deleteToken(id: string): Promise<any> {
+    return this.passwordResetRepository.delete(id);
   }
 }

@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { UserEntity } from './user/entities/user.entity';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { PasswordResetEntity } from './password-reset/entities/passwrod-reset.entity';
+import { CarsModule } from './cars/cars.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -26,6 +27,7 @@ import { PasswordResetEntity } from './password-reset/entities/passwrod-reset.en
     AuthModule,
     UserModule,
     PasswordResetModule,
+    CarsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
