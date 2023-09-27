@@ -4,9 +4,11 @@ import {
   PrimaryGeneratedColumn,
   BeforeInsert,
   Unique,
+  OneToMany,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserRole } from '../enums/user.role';
+import { CarEntity } from 'src/cars/entities/car.entity';
 
 @Entity('user')
 export class UserEntity {
@@ -46,6 +48,9 @@ export class UserEntity {
   hashPassword() {
     this.password = bcrypt.hashSync(this.password, 10);
   }
+
+  @OneToMany(() => CarEntity, (car) => car.user)
+  cars: CarEntity[];
 
   static create(user: Partial<UserEntity>) {
     const newUser = new UserEntity();

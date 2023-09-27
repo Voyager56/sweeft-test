@@ -9,6 +9,7 @@ import { UserEntity } from './user/entities/user.entity';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { PasswordResetEntity } from './password-reset/entities/passwrod-reset.entity';
 import { CarsModule } from './cars/cars.module';
+import { CarEntity } from './cars/entities/car.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -20,7 +21,7 @@ import { CarsModule } from './cars/cars.module';
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE,
-        entities: [UserEntity, PasswordResetEntity],
+        entities: [UserEntity, PasswordResetEntity, CarEntity],
         synchronize: true,
       }),
     }),
