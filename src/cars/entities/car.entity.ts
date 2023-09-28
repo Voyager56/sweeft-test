@@ -9,8 +9,8 @@ import {
 } from 'typeorm';
 import { CarType } from '../enums/car-types.enum';
 import { UserEntity } from '../../user/entities/user.entity';
-import { ParkingEntity } from 'src/parking/entities/parking.entity';
-import { ParkingHistoryEntity } from 'src/parking-history/entities/parking-history.entity';
+import { ParkingEntity } from '../../parking/entities/parking.entity';
+import { ParkingHistoryEntity } from '../../parking-history/entities/parking-history.entity';
 @Entity('car')
 export class CarEntity {
   @PrimaryGeneratedColumn('uuid')

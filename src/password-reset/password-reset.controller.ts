@@ -7,7 +7,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../user/user.service';
 import { PasswordResetService } from './password-reset.service';
 import { PasswordResetDto } from './dto/passwrod-reset.dto';
 

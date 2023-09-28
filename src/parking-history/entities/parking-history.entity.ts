@@ -1,5 +1,5 @@
-import { CarEntity } from 'src/cars/entities/car.entity';
-import { ParkingEntity } from 'src/parking/entities/parking.entity';
+import { CarEntity } from '../../cars/entities/car.entity';
+import { ParkingEntity } from '../../parking/entities/parking.entity';
 import {
   Entity,
   ManyToOne,
