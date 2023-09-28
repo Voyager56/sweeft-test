@@ -25,7 +25,7 @@ export class ParkingService {
   }
 
   async create(parking: Partial<ParkingEntity>) {
-    const parkingSpace = await this.parkingRepository.find({
+    const parkingSpace = await this.parkingRepository.findOne({
       where: { name: parking.name },
     });
 
@@ -50,7 +50,7 @@ export class ParkingService {
   async rentParkingSpace(parkingId: string, userEmail: string, carId: string) {
     const parkingSpace = await this.parkingRepository.findOne({
       where: { id: parkingId },
-      relations: ['parkedCar'],
+      relations: ['parkedCar', 'parkedCar.user'],
     });
 
     if (parkingSpace.parkedCar) {
@@ -75,6 +75,8 @@ export class ParkingService {
         this.chargeUser(parkingSpace.id),
       ),
     );
+
+    return parkingSpace;
   }
 
   async chargeUser(id: string) {

@@ -3,6 +3,7 @@ import { ParkingHistoryEntity } from '../../parking-history/entities/parking-his
 import {
   Column,
   Entity,
+  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -26,6 +27,7 @@ export class ParkingEntity {
   hourlyPrice: number;
 
   @OneToOne(() => CarEntity, (car) => car.id)
+  @JoinColumn()
   parkedCar: CarEntity;
 
   @OneToMany(() => ParkingHistoryEntity, (parkingHistory) => parkingHistory.id)

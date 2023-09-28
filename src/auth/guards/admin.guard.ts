@@ -11,6 +11,7 @@ export class AdminGuard implements CanActivate {
 
     if (request?.user) {
       const user = await this.userService.findByEmail(request.user.email, []);
+      if (!user) return false;
       return user.role === UserRole.Admin;
     }
 

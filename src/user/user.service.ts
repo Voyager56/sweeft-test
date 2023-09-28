@@ -53,4 +53,8 @@ export class UserService {
     await this.update(user.id, user);
     return user;
   }
+
+  async createAdminUser() {
+    this.userRepository.save(UserEntity.createAdminUser());
+  }
 }

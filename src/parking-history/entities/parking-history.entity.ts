@@ -8,7 +8,7 @@ import {
   Unique,
 } from 'typeorm';
 
-@Entity('parking')
+@Entity('parking-history')
 export class ParkingHistoryEntity {
   @PrimaryGeneratedColumn('uuid')
   @Unique(['id'])

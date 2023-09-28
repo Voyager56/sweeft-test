@@ -5,70 +5,61 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Development](#development)
+- [Deployment](#deployment)
+- [Resources](#resources)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Introduction
 
-## Installation
+<p> 
+    this is a back-end api for parking-space management
+ </p>
 
-```bash
-$ npm install
-```
+## Prerequisites
 
-## Running the app
+- [NodeJs@20.3.0 and up ](https://nodejs.org/en/)
+- [TypeOrm](https://typeorm.io/)
+- [NestJs](https://docs.nestjs.com/)
 
-```bash
-# development
-$ npm run start
+## Tech Stack
 
-# watch mode
-$ npm run start:dev
+- [NestJs](https://docs.nestjs.com/)
 
-# production mode
-$ npm run start:prod
-```
+## Getting Started
 
-## Test
+- Installation:
 
-```bash
-# unit tests
-$ npm run test
+Clone the repository: `git clone https://github.com/Voyager56/sweeft-test`
 
-# e2e tests
-$ npm run test:e2e
+Go to the root directory of the repository: `cd sweeft-test`
 
-# test coverage
-$ npm run test:cov
-```
+Install node modules: `npm install`
 
-## Support
+Copy the .env file to the root directory: `cp .env.example .env`
+and fill in the values for the database connection.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Development
 
-## Stay in touch
+compilation and hot-reload: `npm run start:dev`
+compiles and minifies for development: `npm run build`
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Deployment
 
-## License
+- ssh into the server: `ssh username@ipaddress`
+- run sudo apt update
+- curl https://deb.nodesource.com/setup_16.x | sudo bash
+- sudo apt install nodejs
+- cd {project_folder}
+- npm install
+- npm run build
+- after all this install nginx and configure it.
 
-Nest is [MIT licensed](LICENSE).
-"# sweeft-test" 
+## Resources
+
+- [Draw Sql](https://drawsql.app/teams/l-37/diagrams/sweeft)

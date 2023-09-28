@@ -60,4 +60,14 @@ export class UserEntity {
     Object.assign(newUser, user);
     return newUser;
   }
+
+  static createAdminUser() {
+    const newUser = new UserEntity();
+    newUser.name = 'admin';
+    newUser.email = 'admin@admin.com';
+    newUser.password = 'admin';
+    newUser.role = UserRole.Admin;
+    newUser.balance = 1000;
+    return newUser;
+  }
 }
