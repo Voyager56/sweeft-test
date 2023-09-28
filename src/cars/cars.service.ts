@@ -20,6 +20,9 @@ export class CarsService {
 
   async create(carDto: CreateCarDto, userEmail: string): Promise<CarEntity> {
     const user = await this.userService.findByEmail(userEmail, []);
+    if (!user) {
+      throw new HttpException('User Does Not Exist', HttpStatus.BAD_REQUEST);
+    }
     const car = this.carRepository.create({
       ...carDto,
       user: user,
@@ -29,6 +32,9 @@ export class CarsService {
 
   async getAll(userEmail: string): Promise<CarEntity[]> {
     const user = await this.userService.findByEmail(userEmail, ['cars']);
+    if (!user) {
+      throw new HttpException('User Does Not Exist', HttpStatus.BAD_REQUEST);
+    }
     return user.cars;
   }
 
@@ -38,8 +44,10 @@ export class CarsService {
     carId: string,
   ): Promise<CarEntity> {
     const user = await this.userService.findByEmail(userEmail, ['cars']);
+    if (!user) {
+      throw new HttpException('User Does Not Exist', HttpStatus.BAD_REQUEST);
+    }
     const car = user.cars.find((c) => (c.id = carId));
-    console.log(carDto);
     if (!car) {
       new HttpException('Car Does Not Exist', HttpStatus.BAD_REQUEST);
     }
@@ -49,6 +57,9 @@ export class CarsService {
 
   async delete(userEmail: string, carId: string) {
     const user = await this.userService.findByEmail(userEmail, ['cars']);
+    if (!user) {
+      throw new HttpException('User Does Not Exist', HttpStatus.BAD_REQUEST);
+    }
     const car = user.cars.find((c) => (c.id = carId));
     if (!car) {
       new HttpException('Car Does Not Exist', HttpStatus.BAD_REQUEST);

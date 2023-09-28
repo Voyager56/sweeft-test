@@ -1,5 +1,5 @@
 import { IsNotEmpty, MinLength } from 'class-validator';
-import { Match } from 'src/validation-rules/passwords-match';
+import { Match } from '../utils/rules/password-match.rule';
 
 export class PasswordResetDto {
   @IsNotEmpty()

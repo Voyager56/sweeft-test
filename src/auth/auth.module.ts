@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
-import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UserModule } from '../user/user.module';
 import { LocalStrategy } from './local.strategy';
@@ -11,7 +10,7 @@ import { JwtStrategy } from './jwt.strategy';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  controllers: [AuthController],
+  controllers: [],
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forFeature([UserEntity]),
