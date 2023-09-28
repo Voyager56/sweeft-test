@@ -1,4 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { CarEntity } from '../../cars/entities/car.entity';
+import { ParkingHistoryEntity } from '../../parking-history/entities/parking-history.entity';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 
 @Entity('parking')
 export class ParkingEntity {
@@ -7,10 +16,20 @@ export class ParkingEntity {
   id: string;
 
   @Column({ type: 'varchar', length: 255 })
-  adress: string;
+  @Unique(['name'])
+  name: string;
 
-  @Column({ type: 'int64' })
+  @Column({ type: 'varchar', length: 255 })
+  address: string;
+
+  @Column({ type: 'bigint' })
   hourlyPrice: number;
+
+  @OneToOne(() => CarEntity, (car) => car.id)
+  parkedCar: CarEntity;
+
+  @OneToMany(() => ParkingHistoryEntity, (parkingHistory) => parkingHistory.id)
+  parkingHistory: ParkingHistoryEntity[];
 
   static create(parking: Partial<ParkingEntity>) {
     const newParking = new ParkingEntity();

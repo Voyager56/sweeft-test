@@ -4,9 +4,13 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   BeforeInsert,
+  OneToMany,
+  OneToOne,
 } from 'typeorm';
 import { CarType } from '../enums/car-types.enum';
 import { UserEntity } from '../../user/entities/user.entity';
+import { ParkingEntity } from 'src/parking/entities/parking.entity';
+import { ParkingHistoryEntity } from 'src/parking-history/entities/parking-history.entity';
 @Entity('car')
 export class CarEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -26,6 +30,12 @@ export class CarEntity {
     nullable: false,
   })
   user: UserEntity;
+
+  @OneToOne(() => ParkingEntity, (parking) => parking.id)
+  currentParking: ParkingEntity;
+
+  @OneToMany(() => ParkingHistoryEntity, (parkingHistory) => parkingHistory.id)
+  parkingHistory: ParkingHistoryEntity[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

@@ -23,19 +23,19 @@ export class CarsController {
 
   @Get('/')
   getAll(@Request() req) {
-    return this.carService.getAll(req.userId);
+    return this.carService.getAll(req.user.email);
   }
 
   @UsePipes(ValidationPipe)
   @Post('/')
   create(@Request() req, @Body() createCarDto: CreateCarDto) {
-    return this.carService.create(createCarDto, req.userId);
+    return this.carService.create(createCarDto, req.user.email);
   }
 
   @UsePipes(ValidationPipe)
   @Delete(':id')
   delete(@Request() req, @Param('id') id: string) {
-    return this.carService.delete(req.userId, id);
+    return this.carService.delete(req.user.email, id);
   }
 
   @UsePipes(new ValidationPipe({ whitelist: true }))
@@ -45,6 +45,6 @@ export class CarsController {
     @Body() UpdateCarDto: UpdateCarDto,
     @Param('id') id: string,
   ) {
-    return this.carService.update(req.userId, UpdateCarDto, id);
+    return this.carService.update(req.user.email, UpdateCarDto, id);
   }
 }

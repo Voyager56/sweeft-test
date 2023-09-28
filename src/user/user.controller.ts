@@ -12,7 +12,7 @@ import { CreateUserDto } from './dto/user.create.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @UsePipes(ValidationPipe)
+  @UsePipes(new ValidationPipe({ whitelist: true }))
   @Post('register')
   async register(@Body() CreateUserDto: CreateUserDto) {
     return await this.userService.create(CreateUserDto);

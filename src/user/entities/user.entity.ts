@@ -49,6 +49,9 @@ export class UserEntity {
     this.password = bcrypt.hashSync(this.password, 10);
   }
 
+  @Column({ type: 'float', default: 100 })
+  balance: number;
+
   @OneToMany(() => CarEntity, (car) => car.user)
   cars: CarEntity[];
 

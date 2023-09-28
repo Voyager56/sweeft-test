@@ -12,6 +12,10 @@ import { CarsModule } from './cars/cars.module';
 import { CarEntity } from './cars/entities/car.entity';
 import { ParkingModule } from './parking/parking.module';
 import { ParkingEntity } from './parking/entities/parking.entity';
+import { ParkingHistoryModule } from './parking-history/parking-history.module';
+import { ParkingHistoryEntity } from './parking-history/entities/parking-history.entity';
+import { ScheduleModule } from '@nestjs/schedule';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -23,15 +27,23 @@ import { ParkingEntity } from './parking/entities/parking.entity';
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE,
-        entities: [UserEntity, PasswordResetEntity, CarEntity, ParkingEntity],
+        entities: [
+          UserEntity,
+          PasswordResetEntity,
+          CarEntity,
+          ParkingEntity,
+          ParkingHistoryEntity,
+        ],
         synchronize: true,
       }),
     }),
+    ScheduleModule.forRoot(),
     AuthModule,
     UserModule,
     PasswordResetModule,
     CarsModule,
     ParkingModule,
+    ParkingHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

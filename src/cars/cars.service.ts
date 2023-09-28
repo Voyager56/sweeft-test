@@ -18,8 +18,8 @@ export class CarsService {
     return await this.carRepository.findOne({ where: { id } });
   }
 
-  async create(carDto: CreateCarDto, userId: string): Promise<CarEntity> {
-    const user = await this.userService.findById(userId, []);
+  async create(carDto: CreateCarDto, userEmail: string): Promise<CarEntity> {
+    const user = await this.userService.findByEmail(userEmail, []);
     const car = this.carRepository.create({
       ...carDto,
       user: user,
@@ -27,17 +27,17 @@ export class CarsService {
     return await this.carRepository.save(car);
   }
 
-  async getAll(userId: string): Promise<CarEntity[]> {
-    const user = await this.userService.findById(userId, ['cars']);
+  async getAll(userEmail: string): Promise<CarEntity[]> {
+    const user = await this.userService.findByEmail(userEmail, ['cars']);
     return user.cars;
   }
 
   async update(
-    userId: string,
+    userEmail: string,
     carDto: UpdateCarDto,
     carId: string,
   ): Promise<CarEntity> {
-    const user = await this.userService.findById(userId, ['cars']);
+    const user = await this.userService.findByEmail(userEmail, ['cars']);
     const car = user.cars.find((c) => (c.id = carId));
     console.log(carDto);
     if (!car) {
@@ -47,8 +47,8 @@ export class CarsService {
     return this.findById(car.id);
   }
 
-  async delete(userId: string, carId: string) {
-    const user = await this.userService.findById(userId, ['cars']);
+  async delete(userEmail: string, carId: string) {
+    const user = await this.userService.findByEmail(userEmail, ['cars']);
     const car = user.cars.find((c) => (c.id = carId));
     if (!car) {
       new HttpException('Car Does Not Exist', HttpStatus.BAD_REQUEST);
