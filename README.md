@@ -53,7 +53,7 @@ compiles and minifies for development: `npm run build`
 
 - ssh into the server: `ssh username@ipaddress`
 - run sudo apt update
-- curl https://deb.nodesource.com/setup_16.x | sudo bash
+- curl https://deb.nodesource.com/setup_20.x | sudo bash
 - sudo apt install nodejs
 - cd {project_folder}
 - npm install
